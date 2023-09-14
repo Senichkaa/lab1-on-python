@@ -1,6 +1,8 @@
 import math
 
 memory = []
+history = []
+
 print("Starting...")
 
 
@@ -51,9 +53,10 @@ while True:
                 print(result)
 
         saveIntoMemory = input("Do you want to save a result in memory? (Y/N): ")
+
         if saveIntoMemory.lower() == "y":
             memory.append(result)
-            print(result)
+            history.append((value1, chooseOperator, value2, result))
             break
 
     moreCalc = input("Do you want make more calculations? (Y/N): ")
@@ -64,5 +67,13 @@ while True:
     #     value1 = float(input("Enter your first value: "))
     #     value2 = float(input("Enter your second value: "))
 
-if memory is not None:
-    print(f"Memory: {memory}")
+saveIntoHistory = input("Do you want to view history of your calculation? (Y/N): ")
+if saveIntoHistory.lower() == "y":
+    # historyItem = f"{value1} {chooseOperator} {value2} = {result}"
+    # history.append(historyItem)
+    print("History of calculations:")
+    for historyItem in history:
+        value1, chooseOperator, value2, result = historyItem
+        print(f"{value1} {chooseOperator} {value2} = {result}")
+    if memory is not None:
+        print(f"Memory: {memory}")
