@@ -29,29 +29,29 @@ while True:
         else:
             if chooseOperator == "+":
                 result = value1 + value2
-                print(result)
+                # print(result)
             elif chooseOperator == "-":
                 result = value1 - value2
-                print(result)
+                # print(result)
             elif chooseOperator == "*":
                 result = value1 * value2
-                print(result)
+                # print(result)
             elif chooseOperator == "/":
                 if value1 == 0 or value2 == 0:
                     print("You can not divide by zero")
                 else:
                     result = value1 / value2
-                    print(result)
+                    # print(result)
             elif chooseOperator == "^":
                 result = value1**value2
-                print(result)
+                # print(result)
             elif chooseOperator == "√":
                 print("Alert! the square root working only with first number!")
                 result = math.sqrt(value1)
-                print(result)
+                # print(result)
             elif chooseOperator == "%":
                 result = (value1 / value2) * 100
-                print(result)
+                # print(result)
 
             changeDecimals = input(
                 f"Enter a number of decimals if you want to change default parameter: "
@@ -59,15 +59,15 @@ while True:
             if changeDecimals:
                 decimals = int(changeDecimals)
 
-            # changedResult = round(result, decimals)
-            changedResult = f"{result:.{decimals}f}"
-            print(f"Result after changing: {changedResult}")
+                # changedResult = round(result, decimals)
+                result = f"{result:.{decimals}f}"
+                print(f"Result after changing: {result}")
 
         saveIntoMemory = input("Do you want to save a result in memory? (Y/N): ")
 
         if saveIntoMemory.lower() == "y":
-            memory.append(changedResult)
-            history.append((value1, chooseOperator, value2, changedResult, decimals))
+            memory.append(result)
+            history.append((value1, chooseOperator, value2, result))
             break
 
     moreCalc = input("Do you want make more calculations? (Y/N): ")
@@ -79,7 +79,12 @@ saveIntoHistory = input("Do you want to view history of your calculation? (Y/N):
 if saveIntoHistory.lower() == "y":
     print("History of calculations:")
     for historyItem in history:
-        value1, chooseOperator, value2, result, decimals = historyItem
+        (
+            value1,
+            chooseOperator,
+            value2,
+            result,
+        ) = historyItem
         print(f"{value1} {chooseOperator} {value2} = {result}")
     if memory is not None:
         print(f"Memory: {memory}")
