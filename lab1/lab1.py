@@ -6,6 +6,9 @@ decimals = 2
 
 print("Starting...")
 
+# винесення глобал змінних в окремі файли + винесення ф-цій
+# винесення бізнес-логіки в окрему папку/файли
+# 
 
 while True:
     value1 = float(input("Enter your first value: "))
