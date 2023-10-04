@@ -71,6 +71,11 @@ class Calculator:
         if save_into_memory.lower() == "y":
             self.memory.append(self.result)  # Інкапсуляція: робимо зміни в пам'яті через метод класу
             self.history.append((self.value1, self.choose_operator, self.value2, self.result))
+            
+     # Запит чи хоче користувач виконувати подальші калькуляції
+    def more_calculations(self):
+        more_calc = input("Do you want to make more calculations? (Y/N): ")
+        return more_calc.lower() == "y"        
 
     # Запит на перегляд історії та вивід значень
     def view_history(self):
@@ -92,7 +97,10 @@ class Calculator:
             self.calculation()
             self.change_decimals()
             self.memory_save()
-            self.view_history()
+            if not self.more_calculations():
+                print("Disposing...")
+                break
+        self.view_history()
             
 
     
