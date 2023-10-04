@@ -54,6 +54,24 @@ class Calculator:
             self.result = math.sqrt(self.value1)
         elif self.choose_operator == "%":
             self.result = (self.value1 / self.value2) * 100
+            
+    # Збереження в пам'ять
+    def memory_save(self):
+        save_into_memory = input("Do you want to save the result in memory? (Y/N): ")
+        if save_into_memory.lower() == "y":
+            self.memory.append(self.result)  # Інкапсуляція: робимо зміни в пам'яті через метод класу
+            self.history.append((self.value1, self.choose_operator, self.value2, self.result))
+
+    # Запит на перегляд історії та вивід значень
+    def view_history(self):
+        save_into_history = input("Do you want to view the history of your calculations? (Y/N): ")
+        if save_into_history.lower() == "y":
+            print("History of calculations:")
+            for history_item in self.history:
+                value1, choose_operator, value2, result = history_item
+                print(f"{value1} {choose_operator} {value2} = {result}")
+            if self.memory:
+                print(f"Memory: {self.memory}")
 
     # Старт програми, а саме виконання всіх блоків-функцій описаних вище
     def run(self):
@@ -62,7 +80,11 @@ class Calculator:
             self.input_numbers()
             self.choose_operator()
             self.calculation()
+            self.memory_save()
+            self.view_history()
+            
 
+    
 # Основна частина програми
 if __name__ == "__main__":
     calculator = Calculator()
