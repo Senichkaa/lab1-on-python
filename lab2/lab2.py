@@ -33,12 +33,35 @@ class Calculator:
             else:
                 break
 
+            
+    # Калькуляція чисел і помилки в разі неправильного вибору одного з числа
+    def calculation(self):
+        if self.choose_operator == "+":
+            self.result = self.value1 + self.value2
+        elif self.choose_operator == "-":
+            self.result = self.value1 - self.value2
+        elif self.choose_operator == "*":
+            self.result = self.value1 * self.value2
+        elif self.choose_operator == "/":
+            if self.value1 == 0 or self.value2 == 0:
+                print("You can not divide by zero")
+            else:
+                self.result = self.value1 / self.value2
+        elif self.choose_operator == "^":
+            self.result = self.value1**self.value2
+        elif self.choose_operator == "√":
+            print("Alert! the square root working only with the first number!")
+            self.result = math.sqrt(self.value1)
+        elif self.choose_operator == "%":
+            self.result = (self.value1 / self.value2) * 100
+
     # Старт програми, а саме виконання всіх блоків-функцій описаних вище
     def run(self):
         print("Starting...")
         while True:
             self.input_numbers()
             self.choose_operator()
+            self.calculation()
 
 # Основна частина програми
 if __name__ == "__main__":
