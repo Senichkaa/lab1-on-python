@@ -55,6 +55,16 @@ class Calculator:
         elif self.choose_operator == "%":
             self.result = (self.value1 / self.value2) * 100
             
+    # Зміна числа після коми
+    def change_decimals(self):
+        change_decimals = input(
+            f"Enter a number of decimals if you want to change the default parameter: "
+        )
+        if change_decimals:
+            self.decimals = int(change_decimals)  # Інкапсуляція: змінна decimals змінюється в межах класу
+            self.result = f"{self.result:.{self.decimals}f}"  # Поліморфізм: форматування результату залежно від decimals
+            print(f"Result after changing: {self.result}")
+            
     # Збереження в пам'ять
     def memory_save(self):
         save_into_memory = input("Do you want to save the result in memory? (Y/N): ")
@@ -80,6 +90,7 @@ class Calculator:
             self.input_numbers()
             self.choose_operator()
             self.calculation()
+            self.change_decimals()
             self.memory_save()
             self.view_history()
             
