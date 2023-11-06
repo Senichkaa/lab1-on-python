@@ -1,12 +1,19 @@
+import os
+import sys
+
+# Додаємо шлях до каталогу 'lab4' до шляху пошуку модулів
+sys.path.append(os.path.join(os.path.dirname(__file__), "lab4"))
+
 from logic import AsciiArtProcessor
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     symbol_set = {
-        '@': "arts/art_symbol_at_sign.txt",
-        '#': "arts/art_symbol_hash.txt",
-        '*': "arts/art_symbol_star.txt",
-        '%': 'arts/art_symbol_percent.txt',
-        '&':"arts/art_symbol_ampersand.txt"
+        "@": "lab4/arts/art_symbol_at_sign.txt",
+        "#": "lab4/arts/art_symbol_hash.txt",
+        "*": "lab4/arts/art_symbol_star.txt",
+        "%": "lab4/arts/art_symbol_percent.txt",
+        "&": "lab4/arts/art_symbol_ampersand.txt",
     }
 
     while True:
@@ -28,8 +35,10 @@ if __name__ == '__main__':
                 text = processor.text_validate()
 
                 while True:
-                    alignment = input("Choose text align (left, center, right): ").lower()
-                    if alignment not in ['left', 'center', 'right']:
+                    alignment = input(
+                        "Choose text align (left, center, right): "
+                    ).lower()
+                    if alignment not in ["left", "center", "right"]:
                         print("Error! Invalid text align.")
                     else:
                         break
@@ -49,13 +58,22 @@ if __name__ == '__main__':
                         print("The result of ASCII art:")
                         processor.print_art(text, alignment, max_width, color)
 
-                        save_choice = input("Do you want to save the ASCII art(.txt) (yes/no): ").lower()
+                        save_choice = input(
+                            "Do you want to save the ASCII art(.txt) (yes/no): "
+                        ).lower()
                         if save_choice == "yes":
-                            output_file_name = input("Enter the file name to save to(.txt): ")
-                            processor.save_file(processor.print_art(text, alignment, max_width, color), output_file_name)
+                            output_file_name = input(
+                                "Enter the file name to save to(.txt): "
+                            )
+                            processor.save_file(
+                                processor.print_art(text, alignment, max_width, color),
+                                output_file_name,
+                            )
                             print("ASCII art saved to", output_file_name)
 
-                        continue_choice = input("Do you want to continue and draw new ASCII art? (yes/no): ").lower()
+                        continue_choice = input(
+                            "Do you want to continue and draw new ASCII art? (yes/no): "
+                        ).lower()
                         if continue_choice != "yes":
                             exit()  # Exit the program
 
