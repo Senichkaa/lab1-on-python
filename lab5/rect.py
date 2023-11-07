@@ -1,4 +1,9 @@
 from color_utils import color_applying, colors
+from rect_generate import (
+    generate_inner_rectangle,
+    generate_middle_rectangles,
+    generate_outer_rectangle,
+)
 from random import choice
 
 
@@ -7,9 +12,9 @@ class RectangleArt:
         self,
         width,
         height,
-        outer_color="blue",
-        middle_color="magenta",
-        inner_color="red",
+        outer_color="cyan",
+        middle_color="green",
+        inner_color="yellow",
         symbol_count=1,
         symbol_color="*",
     ):
@@ -23,9 +28,11 @@ class RectangleArt:
             self.inner_rectangle_color = inner_color
             self.symbol_count = symbol_count
             self.symbol_color = symbol_color
-            self.outer_rectangle = self.generate_outer_rectangle()
-            self.middle_rectangles = self.generate_middle_rectangles()
-            self.inner_rectangle = self.generate_inner_rectangle()
+            self.outer_rectangle = generate_outer_rectangle(width, height, symbol_color)
+            self.middle_rectangles = generate_middle_rectangles(
+                width, height, symbol_color
+            )
+            self.inner_rectangle = generate_inner_rectangle(width, height, symbol_color)
 
     def set_outer_rectangle_color(self, color):
         self.outer_rectangle_color = color
@@ -35,50 +42,6 @@ class RectangleArt:
 
     def set_inner_rectangle_color(self, color):
         self.inner_rectangle_color = color
-
-    def generate_outer_rectangle(self):
-        rectangle = [[" " for _ in range(self.width)] for _ in range(self.height)]
-        for i in range(self.height):
-            for j in range(self.width):
-                if j == 0 or i == 0:
-                    rectangle[i][j] = self.symbol_color
-        return rectangle
-
-    def generate_middle_rectangles(self):
-        middle_rectangles = []
-        if self.width > 2 and self.height > 2:
-            offset = 1
-            for _ in range(self.height // 2 - 1):
-                rectangle = [
-                    [" " for _ in range(self.width)] for _ in range(self.height)
-                ]
-                for i in range(self.height):
-                    for j in range(self.width):
-                        if i == 0 and (j == 0 or j == self.width - 1):
-                            rectangle[i][j] = self.symbol_color
-                        elif i == self.height - 1 and j == 0:
-                            rectangle[i][j] = self.symbol_color
-                middle_rectangles.append((rectangle, offset))
-                offset += 1
-        return middle_rectangles
-
-    def generate_inner_rectangle(self):
-        rectangle = [[" " for _ in range(self.width)] for _ in range(self.height)]
-        if self.width > 2 and self.height > 2:
-            offset_right = (self.width // 2) + 3
-            offset_down = self.height // 2
-            for i in range(self.height):
-                for j in range(self.width):
-                    if i == 0 or i == self.height - 1 or j == 0 or j == self.width - 1:
-                        rectangle[i][j] = self.symbol_color
-                    if (
-                        i >= offset_down
-                        and i < self.height - offset_down
-                        and j >= offset_right
-                        and j < self.width - offset_right
-                    ):
-                        rectangle[i][j] = " "
-        return rectangle
 
     def combine_rectangles(self):
         combined_width = int((((self.width + self.height) / 2) + self.width) * 3)
@@ -163,20 +126,20 @@ class RectangleArt:
         self.width = new_width
         self.height = new_height
 
-        # Перегенеруйте зовнішній та внутрішній прямокутники з новими розмірами
-        self.outer_rectangle = self.generate_outer_rectangle()
-        self.inner_rectangle = self.generate_inner_rectangle()
-        # Оновіть також середні прямокутники
-        self.middle_rectangles = self.generate_middle_rectangles()
-
-        # Перегенеруйте зовнішній та внутрішній прямокутники з новими розмірами
-        self.outer_rectangle = self.generate_outer_rectangle()
-        self.inner_rectangle = self.generate_inner_rectangle()
+        self.outer_rectangle = generate_outer_rectangle(
+            self.width, self.height, self.symbol_color
+        )
+        self.inner_rectangle = generate_inner_rectangle(
+            self.width, self.height, self.symbol_color
+        )
+        self.middle_rectangles = generate_middle_rectangles(
+            self.width, self.height, self.symbol_color
+        )
 
     def convert_to_2d(self):
         print("Converting 3D art to 2D...")
         for row in self.inner_rectangle:
-            print('  '.join(row))
+            print("  ".join(row))
 
     def save_file(self, output_file_name):
         with open(output_file_name, "w") as f:

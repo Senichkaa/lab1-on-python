@@ -1,6 +1,7 @@
 from rect import RectangleArt
 from color_utils import color_selecting, colors
 
+
 if __name__ == "__main__":
     console_length = 200
 
@@ -71,51 +72,47 @@ if __name__ == "__main__":
                     )
                 print()
                 while True:
-                    alignment = input("Select alignment (left, center, right): ")
+                    alignment = input(
+                        "Select alignment. Available: left/center/right: "
+                    )
                     if alignment not in ["left", "center", "right"]:
-                        print(
-                            "Error: Incorrect alignment. Please choose the correct option."
-                        )
+                        print("Invalid align. Please choose the correct option.")
                     else:
                         if alignment == "left":
-                            print("Left alignment:")
+                            print("Left align:")
                             rectangle_art.align_art(alignment, console_length)
                         elif alignment == "center":
-                            print("Center alignment:")
+                            print("Center align:")
                             rectangle_art.align_art(alignment, console_length)
                         elif alignment == "right":
-                            print("Right alignment:")
+                            print("Right align:")
                             rectangle_art.align_art(alignment, console_length)
                         break
                 while True:
                     manipulate_choice = input(
-                        "Do you want to change your figure? (yes or no): "
+                        "Do you want to change your figure? (yes/no): "
                     ).lower()
                     if manipulate_choice == "yes":
-                        manipulation_type = input(
-                            "Enter the type of change: 1. scale: "
-                        )
+                        manipulation_type = input("Enter the type of change: 1.scale: ")
                         if manipulation_type == "1":
-                            scale_factor = float(input("Enter the scale factor: "))
+                            scale_factor = float(input("Enter the scale: "))
                             rectangle_art.scale_figure(scale_factor)
                             rectangle_art.draw_combined_rectangles()
                             rectangle_art.align_art(alignment, console_length)
                         else:
-                            print("Error: Invalid change type.")
+                            print("Error: Invalid type of change.")
                     else:
                         break
-                convert_2D = input("Want to turn 3D art into 2D? (yes or no): ").lower()
+                convert_2D = input("Do you want to see 2D? (yes/no): ").lower()
                 if convert_2D == "yes":
                     rectangle_art.convert_to_2d()
                 save_choice = input(
-                    "Do you want to save the generated ASCII art to a file? (yes or no): "
+                    "Do you want to save art to file? (yes/no): "
                 ).lower()
                 if save_choice == "yes":
-                    file_name = input("Enter a file name to save the ASCII art: ")
+                    file_name = input("Enter a file name to save: ")
                     rectangle_art.save_file(file_name)
-                continue_choice = input(
-                    "Do you want to continue drawing? (yes or no): "
-                ).lower()
+                continue_choice = input("Want to continue drawing? (yes/no): ").lower()
                 if continue_choice.lower() == "no":
                     print("Exit the program.")
                     break
