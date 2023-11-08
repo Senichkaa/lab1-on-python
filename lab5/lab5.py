@@ -8,7 +8,6 @@ if __name__ == "__main__":
     while True:
         print("Options: ")
         print("1. Draw a cube")
-        print("2. Draw a parallelepiped")
         print("0. Exit")
 
         choice = input("Select an option: ")
@@ -16,10 +15,10 @@ if __name__ == "__main__":
         if choice == "0":
             print("Exit the program.")
             break
-        elif choice not in ["1", "2"]:
+        elif choice not in ["1"]:
             print("Invalid option select. Try again")
             continue
-        if choice in ["1", "2"]:
+        if choice in ["1"]:
             if choice == "1":
                 while True:
                     length = input(
@@ -33,23 +32,6 @@ if __name__ == "__main__":
                             break
                     except ValueError:
                         print("Please enter a valid number")
-            if choice == "2":
-                while True:
-                    length = input(
-                        "Enter the length of the parallelepiped (must be a number >= or = to 4): "
-                    )
-                    width = input(
-                        "Enter the width of the parallelepiped (must be a number >= or = to 4): "
-                    )
-                    try:
-                        length = int(length)
-                        width = int(width)
-                        if length < 4 or width < 4:
-                            print("Length and width must be >= or = to 4. Try again")
-                        else:
-                            break
-                    except ValueError:
-                        print("Please enter a valid number")
             print()
             while True:
                 color_choice = color_selecting()
@@ -58,14 +40,6 @@ if __name__ == "__main__":
                     rectangle_art = RectangleArt(
                         length,
                         length,
-                        outer_color=color_choice,
-                        middle_color=color_choice,
-                        inner_color=color_choice,
-                    )
-                elif choice == "2":
-                    rectangle_art = RectangleArt(
-                        length,
-                        width,
                         outer_color=color_choice,
                         middle_color=color_choice,
                         inner_color=color_choice,

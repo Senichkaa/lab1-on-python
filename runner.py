@@ -8,11 +8,11 @@ sys.path.append("lab5")
 def choose_lab():
     while True:
         try:
-            lab_number = int(input("Введіть номер лабораторної роботи (1-5): "))
-            if 1 <= lab_number <= 5:
+            lab_number = int(input("Select a number of laboratory (1-6): "))
+            if 1 <= lab_number <= 6:
                 return lab_number
             else:
-                print("Введений номер не відповідає жодній лабораторній роботі (1-5)")
+                print("Введений номер не відповідає жодній лабораторній роботі (1-6)")
         except ValueError:
             print("Введіть номер лабораторної роботи у відповідному форматі.")
 
@@ -29,8 +29,10 @@ lab_file_path = os.path.join(
 )
 
 if os.path.isfile(lab_file_path):
-    # Запуск вибраного файлу з використанням кодування 'utf-8'
-    with open(lab_file_path, "r", encoding="utf-8") as lab_file:
-        exec(lab_file.read())
+    try:
+        with open(lab_file_path, "r", encoding="utf-8") as lab_file:
+            exec(lab_file.read())
+    except Exception as e:
+        print(f"Помилка при виконанні файлу: {str(e)}")
 else:
     print(f"Файл для лабораторної роботи {lab_number} не знайдено.")
