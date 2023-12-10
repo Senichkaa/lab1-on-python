@@ -1,4 +1,3 @@
-import math
 import unittest
 import sys
 
@@ -66,6 +65,8 @@ class CalculatorTests(unittest.TestCase):
     def test_view_history_no_records(self):
         with self.subTest("No records"):
             expected_output = "History of calculations:"
+            if not self.history.history:
+                expected_output += " No records"
             self.assertMultiLineEqual(self.history.view_history(), expected_output)
 
     def test_view_history_with_records(self):

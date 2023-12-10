@@ -5,6 +5,7 @@ from rect_generate import (
     generate_outer_rectangle,
 )
 from random import choice
+import os
 
 
 class RectangleArt:
@@ -142,7 +143,16 @@ class RectangleArt:
             print("  ".join(row))
 
     def save_file(self, output_file_name):
-        with open(output_file_name, "w") as f:
+        # Збереження ASCII-арт в текстовий файл у папку "output"
+        output_folder = "output"
+        if not os.path.exists(output_folder):
+            os.makedirs(output_folder)
+
+        output_file_path = os.path.join(output_folder, output_file_name)
+
+        with open(output_file_path, "w") as f:
             combined_matrix = self.combine_rectangles()
             for row in combined_matrix:
                 f.write("".join(row) + "\n")
+
+        print("ASCII-арт збережено у файлі '{}'.".format(output_file_path))

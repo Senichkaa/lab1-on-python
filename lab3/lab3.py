@@ -1,3 +1,4 @@
+import os
 import pyfiglet
 from termcolor import colored
 
@@ -12,8 +13,6 @@ def generate_ascii_art(text, font="standard"):
         return ascii_art
     except Exception as e:
         return str(e)
-
-    # переробити відловлення помилок Exception
 
 
 # Завдання 3: Вибір шрифту
@@ -32,8 +31,6 @@ for color in colors:
 selected_color = input(
     "Виберіть колір тексту для ASCII-арту (напишіть назву кольору або залиште порожнім для чорного кольору): "
 )
-
-# інкапсулювати клас з строками
 
 # Завдання 7: Розмір ARTу
 width = int(input("Введіть ширину ASCII-арту: "))
@@ -57,9 +54,15 @@ if save_to_file.lower() == "y":
     file_name = input("Введіть ім'я файлу для збереження ('.txt'): ")
     if not file_name.endswith(".txt"):
         file_name += ".txt"
-    with open(file_name, "w") as file:
+
+    output_folder = "output"
+    if not os.path.exists(output_folder):
+        os.makedirs(output_folder)
+
+    file_path = os.path.join(output_folder, file_name)
+    with open(file_path, "w") as file:
         file.write(generate_ascii_art(text, selected_font))
 
-        # Exception при неспрацюванні with open()(60 рядок)
-
-print("ASCII-арт збережено у файлі '{}'.".format(file_name))
+    print("ASCII-арт збережено у файлі '{}'.".format(file_path))
+else:
+    print("ASCII-арт не збережено.")

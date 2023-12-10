@@ -10,15 +10,18 @@ class History:
         self.memory.append(result)
 
     def add_to_history(self, value1, operator, value2, result):
-        self.history.append((value1, operator, value2, result))
+        calculation = (value1, operator, value2, result)
+        self.history.append(calculation)
 
     def view_history(self):
-        print("History of calculations:")
-        for history_item in self.history:
-            value1, operator, value2, result = history_item
-            print(f"{value1} {operator} {value2} = {result}")
-        if self.memory:
-            print(f"Memory: {self.memory}")
+        if not self.history:
+            return "History of calculations: No records"
+
+        history_str = "History of calculations:"
+        for calculation in self.history:
+            history_str += f"\n{calculation[0]} {calculation[1]} {calculation[2]} = {calculation[3]}"
+
+        return history_str
 
 
 class Calculator:
